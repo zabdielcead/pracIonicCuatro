@@ -19,7 +19,8 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.styleLightContent(); // para poner el bar que no se vea negro ponerlo en trnsparente
+      // originalmente estaba asi this.statusBar.styleDefault() lo pasamos asi styleLightContent();
       this.splashScreen.hide();
     });
   }

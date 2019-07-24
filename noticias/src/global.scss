@@ -18,3 +18,18 @@
     font-size: 12px;
     color: lightgray;
 }
+
+.action-dark,
+.action-sheet-group {
+    background-color: var(--ion-color-dark) !important;
+    color: white !important;
+}
+
+.action-dark ion-icon {
+    color: white !important;
+}
+
+// si no queremos que esta clase aparezca en ios hacemos lo siguiente ocultamos el icono en ios
+.ios .action-sheet-icon {
+    display: none !important;
+}

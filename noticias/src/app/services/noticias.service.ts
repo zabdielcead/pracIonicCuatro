@@ -16,6 +16,10 @@ const headers = new HttpHeaders({
 
 export class NoticiasService {
 
+  headlinesPage = 0;
+  categoriaActual = '';
+  categoriaPage = 0;
+
   constructor(private http: HttpClient) { }
 
   private ejecutarQuery<T>( query: string) {
@@ -25,12 +29,20 @@ export class NoticiasService {
   }
 
   getTopHeadlines() {
-   return  this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=us`);
+   this.headlinesPage ++;
+   return  this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=us&page=${this.headlinesPage}`);
   // return this.http.get<RespuestaTopHeadlines>(`https://newsapi.org/v2/top-headlines?country=us&apiKey=dfacd68fc1c84a738454cbec4db99d96`);
   }
 
   getTopHeadlinesCategoria(categoria: string) {
-    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=us&category=${categoria}`);
+
+    if (this.categoriaActual === categoria) {
+      this.categoriaPage++;
+    } else {
+        this.categoriaPage = 1;
+        this.categoriaActual = categoria;
+    }
+    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=us&category=${categoria}&page=${this.categoriaPage}`);
    // return this.http.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=dfacd68fc1c84a738454cbec4db99d96`);
   }
 }
